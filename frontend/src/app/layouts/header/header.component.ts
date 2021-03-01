@@ -1,4 +1,4 @@
-import { EventEmitter, Output } from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   @Output() toggle = new EventEmitter<void>();
   @Output() demo = new EventEmitter<string>();
 
-
+  @Input() mobileQueryMax: MediaQueryList | undefined;
 
   constructor() { }
 
