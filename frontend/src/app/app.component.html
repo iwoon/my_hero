@@ -1,9 +1,9 @@
 <mat-drawer-container fullscreen>
-  <mat-drawer mode="side" opened>
+  <mat-drawer mode="side" opened #drawer>
     <app-sidenav></app-sidenav>
   </mat-drawer>
   <mat-drawer-content>
-    <app-header></app-header>
+    <app-header (demo)="printDemo($event)" (toggle)="drawer.toggle()"></app-header>
     <div class="content-wrapper">
       <router-outlet></router-outlet>
     </div>
