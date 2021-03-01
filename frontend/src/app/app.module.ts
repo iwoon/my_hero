@@ -7,12 +7,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { HeaderComponent } from './layouts/header/header.component';
 import { SidenavComponent } from './layouts/sidenav/sidenav.component';
+import { MemberComponent } from './member/member.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ShopComponent } from './shop/shop.component';
+import { StockHomeComponent } from './stock/stock-home/stock-home.component';
+import { StockFormComponent } from './stock/stock-form/stock-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SidenavComponent
+    SidenavComponent,
+    MemberComponent,
+    DashboardComponent,
+    ShopComponent,
+    StockHomeComponent,
+    StockFormComponent
   ],
   imports: [
     BrowserModule,
