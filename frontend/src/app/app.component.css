@@ -1,25 +1,7 @@
-.example-spacer {
-  flex: 1 1 auto;
+.mat-drawer {
+  width: 230px;
 }
 
-.user img {
-  border: 2px solid #ffffffa6;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  object-fit: cover;
-  margin-right: 8px;
-  background-color: white;
-}
-
-.mat-icon-button {
-  margin: 0 .2em;
-}
-
-.mat-button {
-  margin-left: 12px;
-  max-width: 180px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.content-wrapper {
+  padding: 1.8rem;
 }
