@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-stock-form',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockFormComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+
+  constructor(private activatedRoute: ActivatedRoute,) {
+
   }
 
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      params => {
+        const id = params.id
+        if (id) {
+          alert(id)
+        }
+      }
+    );
+  }
 }
