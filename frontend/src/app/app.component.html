@@ -1,6 +1,31 @@
-iblurblur
-<button mat-button>Basic</button>
-<button mat-icon-button color="warn">Accent</button>
-<button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-  <mat-icon>article</mat-icon>
-</button>
+<mat-toolbar color="primary">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button>
+    <mat-icon [matBadgeHidden]="favoriteCount === 0" [matBadge]="favoriteCount" matBadgeColor="warn">favorite</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon [matBadgeHidden]="mailCount === 0" [matBadge]="mailCount" matBadgeColor="warn">mail</mat-icon>
+  </button>
+  <button class="user" mat-button [matMenuTriggerFor]="my_menu">
+    <img [src]="image" class="rounded">
+    {{ username }}
+  </button>
+  <mat-menu #my_menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>dialpad</mat-icon>
+      <span>Redial</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>voicemail</mat-icon>
+      <span>Check voice mail</span>
+    </button>
+    <button mat-menu-item (click)="onClickLogout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
