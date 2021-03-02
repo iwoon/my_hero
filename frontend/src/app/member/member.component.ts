@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { RoleResponse } from '../models/account.model';
+import { NetworkService } from '../services/network.service';
 
 @Component({
   selector: 'app-member',
@@ -13,10 +14,22 @@ export class MemberComponent implements OnInit {
   isLogin = true;
   roles: RoleResponse[] = [];
 
-  constructor() { }
+  constructor(private networkService: NetworkService) { }
 
   ngOnInit(): void {
     this.prepareForm();
+    this.feedRoles();
+  }
+
+  feedRoles(): void {
+    this.networkService.getRoles().subscribe(
+      result => {
+        this.roles = result;
+      },
+      error => {
+        alert(JSON.stringify(error))
+      }
+    );
   }
 
   prepareForm(): void {

@@ -28,8 +28,8 @@
                     <mat-label>role</mat-label>
                     <mat-select name="roleId" formControlName="roleId" required>
                         <mat-option disabled>Choose your role</mat-option>
-                        <mat-option *ngFor="let item of ['11', '22']" [value]="item">
-                            {{ item }}
+                        <mat-option *ngFor="let item of roles" [value]="item.roleId">
+                            {{ item.name }}
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="getRoleErrorMessage(); let errorMessage">
