@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { RoleResponse } from '../models/account.model';
+import { Router } from '@angular/router';
+import { AccountRequest, RoleResponse } from '../models/account.model';
+import { AuthService } from '../services/auth.service';
 import { NetworkService } from '../services/network.service';
 
 @Component({
@@ -14,9 +16,18 @@ export class MemberComponent implements OnInit {
   isLogin = true;
   roles: RoleResponse[] = [];
 
-  constructor(private networkService: NetworkService) { }
+  constructor(
+    private networkService: NetworkService,
+    private authService: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+    if (this.authService.getToken()) {
+      this.router.navigate(['stock']);
+      return;
+    }
+
     this.prepareForm();
     this.feedRoles();
   }
@@ -46,7 +57,35 @@ export class MemberComponent implements OnInit {
   }
 
   onSubmitForm(): void {
+    const account: AccountRequest = {
+      ...this.accountForm.value
+    };
+    if (this.isLogin) {
+      this.networkService.login(account).subscribe(
+        result => {
+          const token = result.token;
+          if (token) {
+            this.authService.setToken(token);
+            this.router.navigate(['stock']);
+            return
+          }
+          alert('token invalid');
+        },
+        error => {
+          alert(JSON.stringify(error))
+        }
+      );
+      return;
+    }
 
+    this.networkService.register(account).subscribe(
+      result => {
+        this.isLogin = !this.isLogin;
+      },
+      error => {
+        alert(JSON.stringify(error))
+      }
+    );
   }
 
   getUsernameErrorMessage(): string {
@@ -70,7 +109,7 @@ export class MemberComponent implements OnInit {
     return roleId?.hasError('required') ? 'You must select a role' : '';
   }
 
-  onClickShowLogin(formGroupDirective: FormGroupDirective): void{
+  onClickShowLogin(formGroupDirective: FormGroupDirective): void {
     formGroupDirective.resetForm();
     this.isLogin = !this.isLogin;
     this.prepareForm();

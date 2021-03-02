@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RoleResponse } from '../models/account.model';
+import { AccountRequest, LoginResponse, RoleResponse } from '../models/account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,20 @@ export class NetworkService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getRoles(): Observable<RoleResponse[]>{
-    let url = `${environment.endpoint}/api/v1/${this.accountAPI}/role`
-    return this.httpClient.get<RoleResponse[]>(url)
+  getRoles(): Observable<RoleResponse[]> {
+    let url = `${environment.endpoint}/api/v1/${this.accountAPI}/role`;
+    return this.httpClient.get<RoleResponse[]>(url);
+  }
+
+  // *** [POST] Sent JSON to server
+  login(accountRequest: AccountRequest): Observable<LoginResponse> {
+    let url = `${environment.endpoint}/api/v1/${this.accountAPI}/login`
+    return this.httpClient.post<LoginResponse>(url, accountRequest);
+  }
+
+  // *** [POST] Sent JSON to server
+  register(accountRequest: AccountRequest): Observable<unknown> {
+    let url = `${environment.endpoint}/api/v1/${this.accountAPI}/register`
+    return this.httpClient.post<unknown>(url, accountRequest);
   }
 }
