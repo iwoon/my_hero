@@ -1,0 +1,53 @@
+.bg {
+  background-image: url("~src/assets/images/background.jpg");
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  max-width: 400px;
+  padding: 0;
+  margin: 20px;
+}
+
+mat-card img {
+  width: 100%;
+  height: auto;
+}
+
+mat-card-content {
+  padding: 12px 22px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* for validation set padding-bottom */
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+::ng-deep .mat-form-field-subscript-wrapper {
+  display: contents;
+}
+
+::ng-deep .mat-form-field-invalid .ng-trigger-transitionMessages {
+  margin-bottom: 1em;
+  margin-top: inherit;
+}
+
+/* for validation set padding-bottom */
+
+mat-card-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+mat-card-actions>.mat-raised-button,
+mat-card-actions>.mat-flat-button {
+  margin-top: 12px;
+}
