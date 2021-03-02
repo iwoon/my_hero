@@ -1,11 +1,16 @@
-<mat-drawer-container fullscreen>
-  <mat-drawer mode="side" [opened]="mobileQueryMax?.matches ? false : true" #drawer>
-    <app-sidenav></app-sidenav>
-  </mat-drawer>
-  <mat-drawer-content>
-    <app-header [mobileQueryMax]="mobileQueryMax" (demo)="printDemo($event)" (toggle)="drawer.toggle()"></app-header>
-    <div class="content-wrapper">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+<ng-container *ngIf="authService.getToken(); else elseTemplate">
+  <mat-drawer-container fullscreen>
+    <mat-drawer mode="side" [opened]="mobileQueryMax?.matches ? false : true" #drawer>
+      <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+      <app-header [mobileQueryMax]="mobileQueryMax" (demo)="printDemo($event)" (toggle)="drawer.toggle()"></app-header>
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</ng-container>
+<ng-template #elseTemplate>
+  <app-member></app-member>
+</ng-template>
