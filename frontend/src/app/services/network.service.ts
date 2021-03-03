@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountRequest, LoginResponse, RoleResponse } from '../models/account.model';
+import { ProductResponse } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,10 @@ export class NetworkService {
   register(accountRequest: AccountRequest): Observable<unknown> {
     let url = `${environment.endpoint}/api/v1/${this.accountAPI}/register`
     return this.httpClient.post<unknown>(url, accountRequest);
+  }
+
+  getProducts(): Observable<ProductResponse[]> {
+    let url = `${environment.endpoint}/api/v1/${this.productAPI}`;
+    return this.httpClient.get<ProductResponse[]>(url);
   }
 }

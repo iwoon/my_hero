@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { NetworkService } from 'src/app/services/network.service';
 
 export interface UserData {
   id: string;
@@ -28,25 +29,43 @@ const NAMES: string[] = [
   templateUrl: './stock-home.component.html',
   styleUrls: ['./stock-home.component.css']
 })
-export class StockHomeComponent implements AfterViewInit {
+export class StockHomeComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(
+    private networkService: NetworkService
+  ) {
     // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
+  }
+
+  ngOnInit(): void {
+    this.feedProduct();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
+  feedProduct(): void {
+    this.networkService.getProducts().subscribe(
+      result => {
+        alert(result.length)
+      },
+      error => {
+        alert(JSON.stringify(error))
+      }
+    );
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -61,7 +80,7 @@ export class StockHomeComponent implements AfterViewInit {
 /** Builds and returns a new User. */
 function createNewUser(id: number): UserData {
   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
 
   return {
     id: id.toString(),

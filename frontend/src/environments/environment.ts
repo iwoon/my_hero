@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  endpoint: 'https://0cfce236b6e1.jp.ngrok.io',
+  endpoint: 'http://localhost:3000',
   keyToken: 'dev_token',
 };
