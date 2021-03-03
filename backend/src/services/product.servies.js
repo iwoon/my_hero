@@ -35,7 +35,7 @@ exports.findById = async id => {
         { create: 0, _id: 0 }
     ).populate('category');
 
-    if(!doc){
+    if (!doc) {
         return doc;
     }
 
@@ -43,4 +43,18 @@ exports.findById = async id => {
     return { ...result, categortName: category.name }
 }
 
+exports.add = async (product) => {
+    const counter = await Counter.findOneAndUpdate(
+        {},
+        { $inc: { productId: 1 } },
+        { new: true }
+    );
+    return await Products.create({ ...product, productId: counter.productId });
+}
+
+exports.update = async (id, product) => await Products.findOneAndUpdate({ productId: id }, product, { new: true });
+
+exports.delete = async (id) => await Products.findOneAndDelete({ productId: id })
+
+exports.categoryList = async () => await Category.find({}, { created: 0 })
 
