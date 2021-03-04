@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductResponse } from 'src/app/models/product.model';
 import { NetworkService } from 'src/app/services/network.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-stock-home',
@@ -51,6 +52,33 @@ export class StockHomeComponent implements OnInit, AfterViewInit {
   }
 
   onClickDelete(productId: string): void {
-    alert(productId)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteProduct(productId);
+      }
+    })
+  }
+
+  deleteProduct(productId: string): void {
+    this.networkService.deleteProducts(productId).subscribe(
+      result => {
+        Swal.fire({
+          icon: 'success',
+          text: 'Successfully Deleted'
+        })
+        this.feedProduct();
+      },
+      error => {
+        alert(JSON.stringify(error))
+      }
+    );
   }
 }

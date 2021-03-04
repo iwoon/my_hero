@@ -36,4 +36,9 @@ export class NetworkService {
     let url = `${environment.endpoint}/api/v1/${this.productAPI}`;
     return this.httpClient.get<ProductResponse[]>(url);
   }
+
+  deleteProducts(productId: string): Observable<unknown> {
+    let url = `${environment.endpoint}/api/v1/${this.productAPI}/${productId}`;
+    return this.httpClient.delete<unknown>(url);
+  }
 }
