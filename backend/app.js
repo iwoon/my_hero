@@ -1,6 +1,10 @@
 require('./src/configs/db')
 const express = require('express')
 const app = express()
+const cors = require('cors')
+const corsOptions = require('./src/configs/cors')
+
+app.use(cors(corsOptions.policy))
 
 app.use('/api/v1', require('./src/routes/routes'))
 
