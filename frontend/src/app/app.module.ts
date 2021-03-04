@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShopComponent } from './shop/shop.component';
 import { StockHomeComponent } from './stock/stock-home/stock-home.component';
 import { StockFormComponent } from './stock/stock-form/stock-form.component';
+import { NetworkImagePipe } from './shared/pipes/network-image.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { StockFormComponent } from './stock/stock-form/stock-form.component';
     DashboardComponent,
     ShopComponent,
     StockHomeComponent,
-    StockFormComponent
+    StockFormComponent,
+    NetworkImagePipe
   ],
   imports: [
     BrowserModule,

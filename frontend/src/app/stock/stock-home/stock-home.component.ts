@@ -19,7 +19,7 @@ export class StockHomeComponent implements OnInit, AfterViewInit {
 
   constructor(
     private networkService: NetworkService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.feedProduct();
@@ -48,5 +48,9 @@ export class StockHomeComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onClickDelete(productId: string): void {
+    alert(productId)
   }
 }
