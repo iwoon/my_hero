@@ -6,6 +6,8 @@ const corsOptions = require('./src/configs/cors')
 
 app.use(cors(corsOptions.policy))
 
+app.use('/images', express.static('images'))
+
 app.use('/api/v1', require('./src/routes/routes'))
 
 const PORT = process.env.PORT || 3000
