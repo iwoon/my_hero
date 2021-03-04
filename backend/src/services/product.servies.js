@@ -1,5 +1,6 @@
 const Products = require('../entities/product')
 const Category = require('../entities/category')
+const Counter = require('../entities/counter')
 
 exports.findAll = async () => await Products.aggregate([
     {
@@ -40,7 +41,7 @@ exports.findById = async id => {
     }
 
     const { category, ...result } = doc.toJSON();
-    return { ...result, categortName: category.name }
+    return { ...result, categoryName: category.name }
 }
 
 exports.add = async (product) => {
