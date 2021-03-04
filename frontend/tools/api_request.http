@@ -1,0 +1,107 @@
+@host = http://localhost:3000
+@baseURL = {{host}}/api/v1
+@productAPI = products
+@accountAPI = accounts
+
+# JWT Token
+@bearerToken = Bearer {{login.response.body.token}}
+
+###
+GET {{baseURL}}/{{productAPI}} HTTP/1.1
+Authorization: {{bearerToken}}
+
+###
+
+GET {{baseURL}}/{{productAPI}}/18 HTTP/1.1
+Authorization: {{bearerToken}}
+
+###
+
+POST {{baseURL}}/{{productAPI}} HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
+
+iBlurBlur
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="price"
+
+1150
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="stock"
+
+1112
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="categoryId"
+
+603e2ca40ddc097ddd78df6d
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="FormFiles"; filename="demo.png"
+Content-Type: image/png
+
+< ./demo.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+PUT {{baseURL}}/{{productAPI}}/18 HTTP/1.1
+Authorization: {{bearerToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
+
+cat lover
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="price"
+
+1150
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="stock"
+
+0
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="categoryId"
+
+603e2d020ddc097ddd78df6e
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="FormFiles"; filename="demo.png"
+Content-Type: image/png
+
+< ./demo.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+DELETE {{baseURL}}/{{productAPI}}/20 HTTP/1.1
+Authorization: {{bearerToken}}
+
+###
+
+POST {{baseURL}}/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "iblurblur4",
+    "password": "password",
+    "position": "Admin"
+}
+
+###
+
+# @name login
+POST {{baseURL}}/{{accountAPI}}/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "iblurblur9@gmail.com",
+    "password": "password"
+}
+
+###
+
+GET http://localhost:8080/image/product_01.jpg HTTP/1.1
+
+###
