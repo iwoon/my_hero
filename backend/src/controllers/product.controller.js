@@ -88,4 +88,9 @@ exports.deleteProduct = async (req, res) => {
     res.status(204).json()
 }
 
-exports.getCategories = async (req, res) => res.json(await productService.categoryList())
+exports.getCategories = async (req, res) => {
+    const result = await productService.categoryList()
+    return res.json(result.map(category => {
+        return { name: category.name, categoryId: category._id }
+    }));
+}
