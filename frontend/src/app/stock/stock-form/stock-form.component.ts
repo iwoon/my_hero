@@ -32,8 +32,8 @@ export class StockFormComponent implements OnInit {
     this.hasHistory = this.router.navigated;
   }
 
-  ngOnInit(): void {
-    this.feedCategories();
+  async ngOnInit(): Promise<void> {
+    await this.feedCategories();
     this.activatedRoute.params.subscribe(
       params => {
         const id = params.id;
@@ -53,10 +53,15 @@ export class StockFormComponent implements OnInit {
     this.networkService.getProductById(id.toString()).subscribe(
       result => {
 
+        console.log(JSON.stringify(result));
+
         const { productId, name, price, stock, image, categoryName } = { ...result };
         // ** find same flitter. but find will get one element
         const categoryId = this.categories.find(category => category.name === categoryName)?.categoryId
         this.imageSrc = image;
+    
+
+
         this.productForm.setValue({ productId, name, price, stock, categoryId });
 
       },
@@ -92,10 +97,10 @@ export class StockFormComponent implements OnInit {
     try {
       let message: string;
       if (this.editMode) {
-        // await this.networkService.editProduct(product).toPromise();
+        await this.networkService.editProduct(product).toPromise();
         message = 'Successfully edited product';
       } else {
-        // await this.networkService.addProduct(product).toPromise();
+        await this.networkService.addProduct(product).toPromise();
         message = 'Successfully created product';
       }
       this.isSubmitted = true;

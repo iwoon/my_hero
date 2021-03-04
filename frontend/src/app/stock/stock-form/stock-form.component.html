@@ -30,7 +30,7 @@
                 </mat-form-field>
             </div>
             <div class="upload_image">
-                <img *ngIf="imageSrc" [src]="isBase64(imageSrc) ? imageSrc: (imageSrc| networkImage)">
+                <img *ngIf="imageSrc" [src]="isBase64(imageSrc) ? imageSrc : (imageSrc| networkImage)">
                 <button mat-stroked-button (click)="fileInput.click()" type="button">
                     <mat-icon>photo</mat-icon>
                     <span class="ml-2">Select image</span>
