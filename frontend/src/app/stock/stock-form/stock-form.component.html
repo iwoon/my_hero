@@ -1,1 +1,48 @@
-<p>stock-form works!</p>
+<form #productForm="ngForm" (submit)="onSubmitForm(productForm)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                {{ editMode ? 'Edit Product': ' Create Product' }}
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="input-text">
+                <input ngModel name="productId" matInput hidden>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input ngModel name="name" matInput required>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Price</mat-label>
+                    <input ngModel name="price" matInput type="number" required min="0" max="1000000">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Stock</mat-label>
+                    <input ngModel name="stock" matInput type="number" required min="0" max="10000">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Category</mat-label>
+                    <mat-select ngModel name="categoryId" required>
+                        <mat-option *ngFor="let category of categories " [value]="category.categoryId">
+                            {{ category.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="upload_image">
+                <img *ngIf="imageSrc" [src]="isBase64(imageSrc) ? imageSrc: (imageSrc| networkImage)">
+                <button mat-stroked-button (click)="fileInput.click()" type="button">
+                    <mat-icon>photo</mat-icon>
+                    <span class="ml-2">Select image</span>
+                    <input #fileInput (change)="previewImage($event)" accept="image/*" type="file" />
+                </button>
+            </div>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <!-- if using ngForm must be type="button" (default: submit)-->
+            <button mat-stroked-button (click)="onClickBack()" type="button">cancel</button>
+            <button mat-raised-button color="primary" type="submit">submit</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

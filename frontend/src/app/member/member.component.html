@@ -4,8 +4,6 @@
             <img src="assets/images/banner.jpg" />
         </mat-card-title>
         <mat-card-content>
-
-
             <!-- !!! #form="ngForm" for reset error of angular material -->
             <form *ngIf="accountForm" [formGroup]="accountForm" #form="ngForm" (submit)="onSubmitForm()">
                 <mat-form-field appearance="outline">

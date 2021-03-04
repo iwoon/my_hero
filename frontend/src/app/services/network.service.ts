@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountRequest, LoginResponse, RoleResponse } from '../models/account.model';
-import { ProductResponse } from '../models/product.model';
+import { CategoryResponse, ProductResponse } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,15 @@ export class NetworkService {
     return this.httpClient.get<ProductResponse[]>(`/${this.productAPI}`);
   }
 
+  getProductById(productId: string): Observable<ProductResponse> {
+    return this.httpClient.get<ProductResponse>(`/${this.productAPI}/${productId}`);
+  }
+
   deleteProducts(productId: string): Observable<unknown> {
     return this.httpClient.delete<unknown>(`/${this.productAPI}/${productId}`);
+  }
+
+  getCategories(): Observable<CategoryResponse[]> {
+    return this.httpClient.get<CategoryResponse[]>(`/${this.productAPI}/category`);
   }
 }

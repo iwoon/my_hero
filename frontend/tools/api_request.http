@@ -17,6 +17,11 @@ Authorization: {{bearerToken}}
 
 ###
 
+GET {{baseURL}}/{{productAPI}}/category HTTP/1.1
+Authorization: {{bearerToken}}
+
+###
+
 POST {{baseURL}}/{{productAPI}} HTTP/1.1
 Authorization: {{bearerToken}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
