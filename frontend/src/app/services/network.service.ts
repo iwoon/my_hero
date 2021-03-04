@@ -16,29 +16,24 @@ export class NetworkService {
   constructor(private httpClient: HttpClient) { }
 
   getRoles(): Observable<RoleResponse[]> {
-    let url = `${environment.endpoint}/api/v1/${this.accountAPI}/role`;
-    return this.httpClient.get<RoleResponse[]>(url);
+    return this.httpClient.get<RoleResponse[]>(`/${this.accountAPI}/role`);
   }
 
   // *** [POST] Sent JSON to server
   login(accountRequest: AccountRequest): Observable<LoginResponse> {
-    let url = `${environment.endpoint}/api/v1/${this.accountAPI}/login`
-    return this.httpClient.post<LoginResponse>(url, accountRequest);
+    return this.httpClient.post<LoginResponse>(`/${this.accountAPI}/login`, accountRequest);
   }
 
   // *** [POST] Sent JSON to server
   register(accountRequest: AccountRequest): Observable<unknown> {
-    let url = `${environment.endpoint}/api/v1/${this.accountAPI}/register`
-    return this.httpClient.post<unknown>(url, accountRequest);
+    return this.httpClient.post<unknown>(`/${this.accountAPI}/register`, accountRequest);
   }
 
   getProducts(): Observable<ProductResponse[]> {
-    let url = `${environment.endpoint}/api/v1/${this.productAPI}`;
-    return this.httpClient.get<ProductResponse[]>(url);
+    return this.httpClient.get<ProductResponse[]>(`/${this.productAPI}`);
   }
 
   deleteProducts(productId: string): Observable<unknown> {
-    let url = `${environment.endpoint}/api/v1/${this.productAPI}/${productId}`;
-    return this.httpClient.delete<unknown>(url);
+    return this.httpClient.delete<unknown>(`/${this.productAPI}/${productId}`);
   }
 }

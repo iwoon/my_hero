@@ -15,6 +15,7 @@ import { ShopComponent } from './shop/shop.component';
 import { StockHomeComponent } from './stock/stock-home/stock-home.component';
 import { StockFormComponent } from './stock/stock-form/stock-form.component';
 import { NetworkImagePipe } from './shared/pipes/network-image.pipe';
+import { interceptors } from './interceptors/interceptors';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { NetworkImagePipe } from './shared/pipes/network-image.pipe';
     HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [interceptors],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
