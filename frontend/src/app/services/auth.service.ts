@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   getToken(): string {
-    return localStorage.getItem(environment.keyToken) ?? 'ddd';
+    return localStorage.getItem(environment.keyToken) ?? '';
   }
 
   removeToken() {

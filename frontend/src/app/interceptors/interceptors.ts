@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, } from '@angular/common/http';
 import { MainInterceptor } from './main.interceptor';
 import { LogInterceptor } from './log.interceptor';
-// import { AuthInterceptor } from './auth.interceptor';
+import { AuthInterceptor } from './auth.interceptor';
 
 export const interceptors = [
     {
@@ -14,11 +14,11 @@ export const interceptors = [
       useClass: EnsureHttpsInterceptor,
       multi: true
     }, */
-    //   {
-    //     provide: HTTP_INTERCEPTORS,
-    //     useClass: AuthInterceptor,
-    //     multi: true
-    //   },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    },
     {
         provide: HTTP_INTERCEPTORS,
         useClass: LogInterceptor,
