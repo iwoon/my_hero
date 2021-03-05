@@ -16,12 +16,12 @@ const generateToken = (payload) => jwt.sign(payload, privateKey, { ...signOption
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
-    if (!eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpYmx1cmJsdXJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.LJ4LiwCDJdjvUbtBIjdUQCFoUefpYgBzGISGLTj-TYo) {
+    if (!token) {
         res.status(401).json()
         return
     }
 
-    jwt.verify(eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpYmx1cmJsdXJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.LJ4LiwCDJdjvUbtBIjdUQCFoUefpYgBzGISGLTj-TYo, publicKey, signOptions, (err, decoded) => {
+    jwt.verify(token, publicKey, signOptions, (err, decoded) => {
         if (err) {
             res.status(401).json()
             return
