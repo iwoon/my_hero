@@ -16,6 +16,7 @@ import { StockHomeComponent } from './stock/stock-home/stock-home.component';
 import { StockFormComponent } from './stock/stock-form/stock-form.component';
 import { NetworkImagePipe } from './shared/pipes/network-image.pipe';
 import { interceptors } from './interceptors/interceptors';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { interceptors } from './interceptors/interceptors';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    ChartsModule,
   ],
   providers: [interceptors],
   bootstrap: [AppComponent]
