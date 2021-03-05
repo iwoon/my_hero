@@ -4,13 +4,13 @@ const bcrypt = require('bcryptjs')
 const jwt = require('../configs/jwt')
 
 exports.login = async (username, password) => {
-    const result = await Account.findOne({ username: username });
+    const result = await Account.findOne({ username: username }).populate('role');
     if (result) {
         if (await bcrypt.compare(password, result.password)) {
             // !!! Not Add Sensertive data
             const payload = {
                 sub: result.username,
-                role: result.role,
+                role: result.role.name,
                 addtional: 'demo',
             };
             return jwt.generateToken(payload);
