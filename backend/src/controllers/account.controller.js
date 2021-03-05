@@ -1,7 +1,13 @@
 const accountService = require('../services/account.service')
 
 exports.login = async (req, res) => {
-
+    const {username, password} = req.body;
+    const token = await accountService.login(username, password);
+    if(!token){
+        res.status(401).json();
+        return
+    }
+    res.json({token});
 }
 
 exports.register = async (req, res) => {

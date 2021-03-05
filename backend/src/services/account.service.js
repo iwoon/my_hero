@@ -1,9 +1,22 @@
 const Account = require('../entities/account')
 const Role = require('../entities/role')
 const bcrypt = require('bcryptjs')
+const jwt = require('../configs/jwt')
 
 exports.login = async (username, password) => {
-    await Account.find({})
+    const result = await Account.findOne({ username: username });
+    if (result) {
+        if (await bcrypt.compare(password, result.password)) {
+            // !!! Not Add Sensertive data
+            const payload = {
+                sub: result.username,
+                role: result.role,
+                addtional: 'demo',
+            };
+            return jwt.generateToken(payload);
+        }
+    }
+    return '';
 }
 
 exports.register = async (account) => {
