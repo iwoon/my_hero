@@ -1,7 +1,7 @@
 @host = http://localhost:3000
 @baseURL = {{host}}/api/v1
 @productAPI = products
-@accountAPI = accounts
+@accountAPI = account
 
 # JWT Token
 @bearerToken = Bearer {{login.response.body.token}}
@@ -87,13 +87,13 @@ Authorization: {{bearerToken}}
 
 ###
 
-POST {{baseURL}}/auth/register HTTP/1.1
+POST {{baseURL}}/{{accountAPI}}/register HTTP/1.1
 content-type: application/json
 
 {
     "username": "iblurblur4",
     "password": "password",
-    "position": "Admin"
+    "roleId": "603edaaf231df9bae839bd22"
 }
 
 ###
@@ -106,6 +106,10 @@ content-type: application/json
     "username": "iblurblur9@gmail.com",
     "password": "password"
 }
+
+###
+
+GET {{baseURL}}/{{accountAPI}}/role HTTP/1.1
 
 ###
 

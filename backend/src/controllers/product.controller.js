@@ -1,4 +1,4 @@
-const productService = require('../services/product.servies')
+const productService = require('../services/product.service')
 const multer = require('multer')
 const multerConfig = require('../configs/multer')
 const upload = multer(multerConfig.config).single(multerConfig.keyUpload)

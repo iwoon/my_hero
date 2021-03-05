@@ -4,6 +4,8 @@ const app = express()
 const cors = require('cors')
 const corsOptions = require('./src/configs/cors')
 
+app.use(express.json())
+
 app.use(cors(corsOptions.policy))
 
 app.use('/images', express.static('images'))
