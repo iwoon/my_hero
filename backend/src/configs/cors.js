@@ -1,5 +1,6 @@
 exports.policy = {
     origin: [
+        'http://localhost:1150',
         'http://localhost:4200',
         'http://example.com',
     ],
