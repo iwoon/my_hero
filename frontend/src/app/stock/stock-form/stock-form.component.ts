@@ -52,18 +52,11 @@ export class StockFormComponent implements OnInit {
   feedProduct(id: number) {
     this.networkService.getProductById(id.toString()).subscribe(
       result => {
-
-        console.log(JSON.stringify(result));
-
         const { productId, name, price, stock, image, categoryName } = { ...result };
         // ** find same flitter. but find will get one element
         const categoryId = this.categories.find(category => category.name === categoryName)?.categoryId
         this.imageSrc = image;
-    
-
-
         this.productForm.setValue({ productId, name, price, stock, categoryId });
-
       },
       error => {
         alert('Product ID Not Found');

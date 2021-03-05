@@ -18,6 +18,13 @@ export class StockHomeComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  get soldout(): number {
+    return this.dataSource.data.reduce(
+      (sum, product) => product.stock <= 0 ? sum + 1 : sum,
+      0
+    );
+  }
+
   constructor(
     private networkService: NetworkService
   ) { }
