@@ -80,6 +80,10 @@ exports.updateProduct = (req, res) => {
 
 
 exports.deleteProduct = async (req, res) => {
+    if(req.role !== 'Admin'){
+        res.status(403).json();
+        return;
+    }
     const result = await productService.delete(req.params.id)
     if (!result) {
         res.status(404).json()

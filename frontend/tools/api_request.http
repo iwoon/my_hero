@@ -113,6 +113,11 @@ GET {{baseURL}}/{{accountAPI}}/role HTTP/1.1
 
 ###
 
+GET {{baseURL}}/{{accountAPI}}/info HTTP/1.1
+Authorization: {{bearerToken}}
+
+###
+
 GET http://localhost:8080/image/product_01.jpg HTTP/1.1
 
 ###
